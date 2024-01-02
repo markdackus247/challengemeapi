@@ -1,0 +1,5 @@
+# The credentials are only being used for development.
+
+mongo
+use challengemeapi
+db.createUser( { user: "challengemeapi", pwd: "iXyO3Vo5oCfmKHjCYNHbxLJaO7xUlMVk", roles: ["dbAdmin"] })
