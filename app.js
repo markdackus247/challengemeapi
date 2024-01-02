@@ -6,7 +6,7 @@ const logger = require('morgan');
 const mongoConnect = require('./util/database/db');
 
 const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
+const myChallenge = require('./routes/myChallenge');
 
 const app = express();
 
@@ -17,10 +17,11 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/myChallenge', myChallenge);
 
 mongoConnect((client) => {
     console.log('App.js connected to the DB');
+    // console.log('client:', client);
 })
 
 module.exports = app;

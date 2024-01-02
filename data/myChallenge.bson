@@ -1,0 +1,39 @@
+[
+    {
+        "_id": "15acf8db-a7e9-425a-a1bf-7d18098ec408",
+        "description": "Ik kan een laptop gebruiksklaar maken.",
+        "code": "5",
+        "crebo": [
+            {
+                "_id": "7053f9cc-f408-44af-bced-e647033465fb",
+                "code": "25606",
+                "name": "Expert IT systems and devices",
+                "level": "4"
+            },
+            {
+                "_id": "41e86c17-8ac1-4f2b-a9c0-80ec9f468904",
+                "code": "25605",
+                "name": "Allround medewerker IT systems and devices",
+                "level": "3"
+            }
+        ],
+        "assessmentCriteria": [
+            {
+                "_id": "3a4ce6cc-bbc3-44df-aaf1-b3fad783493a",
+                "description": "Gebruikersdevices zijn conform opdracht geïnstalleerd en geconfigeerd."
+            },
+            {
+                "_id": "c0535a24-61a2-45d3-9595-f36051505ec8",
+                "description": "De kandidaat werkt en test gebruikersdevices volgens bedrijfsafspraken."
+            },
+            {
+                "_id": "15e9f15be-9601-4f64-ad2f-06eb3d59b73b",
+                "description": "De kandidaat heeft rekening gehouden met beveiliging van de informatievoorziening zoals bijvoorbeeld: privacy, gebruikersrechten en licentiebeheer."
+            },
+            {
+                "_id": "b95ffb19-08be-4972-a78a-58df105532dd",
+                "description": "De uitgevoerde werkzaamheden zijn volledig, correct en duidelijk gedocumenteerd in een daarvoor bestemd registratiesysteem."
+            }
+        ]
+    }
+]
