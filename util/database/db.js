@@ -11,6 +11,10 @@ const dbPassword = "iXyO3Vo5oCfmKHjCYNHbxLJaO7xUlMVk";
 const dbHost = "127.0.0.1";     
 const dbPort = "27017";
 
+// The MongoClient connection will be stored in then internal variable _db.
+// In another function getDb() the connection will be returned.
+let _db;
+
 // This function connects to the mongoDB connection service.
 // This function accepts a function as callback function.
 // The connect() method of the MongoClient is a async function and returns a promis.
@@ -26,16 +30,34 @@ const mongoConnect = (callback) => {
         )
         .then(
             client => {
-                // console.log(`DB ${dbName} is connected with user ${dbUsername}`);
-                callback(client);
+                // console.log(`DB ${dbName} is connected with user ${dbUsername}`);             
+                _db = client.db(dbName);
+                callback();
             }
         )
         .catch(
-            err => console.log(err)
+            err => {
+                console.log(err);
+                throw err;
+            }
         )
-
 }
 
-module.exports = mongoConnect;
+// import this function in javascript files where you want to connect to the
+// mongodb database. It returns the connection with the database ("challengemeapi").
+const getDb = () => {
+    if (_db) {
+        return _db;
+    }
+    throw 'No database found!';
+}
+
+// Both functions will be exported.
+// use a import like this:
+// const { getDb } = require('../util/database/db');
+// or
+// const getDb = require('../util/database/db').getDb;
+exports.mongoConnect = mongoConnect;
+exports.getDb = getDb;
 
 
