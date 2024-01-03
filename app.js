@@ -19,9 +19,25 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/myChallenge', myChallenge);
 
+let db;
+
 mongoConnect((client) => {
     console.log('App.js connected to the DB');
-    // console.log('client:', client);
+    db = client;
+    console.log('db:', db);
+
+    const docs = [
+        { "_id": 1, "color": "red"},
+        { "_id": 2, "color": "purple"},
+        { "_id": 1, "color": "yellow"},
+        { "_id": 3, "color": "blue"}
+     ];
+    
+    db.db('challengemeapi').collection('colors')
+        .insertMany(docs)
+        .then()
+        .catch()
+
 })
 
 module.exports = app;
