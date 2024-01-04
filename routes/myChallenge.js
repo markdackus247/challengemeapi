@@ -1,9 +1,12 @@
 const express = require('express');
 const router = express.Router();
 
-const { getAddChallenge } = require('../controllers/myChallenge');
+const { 
+    postAddMyChallenge 
+} = require('../controllers/myChallenge');
 
-/* GET home page. */
-router.get('/', getAddChallenge);
+// POST route for /myChallenge
+// example payload: { "description": "Ik een nieuwe mobiele telefoon gebruikersklaar maken en de oude gegevens mee overzetten." }
+router.post('/', postAddMyChallenge);
 
 module.exports = router;

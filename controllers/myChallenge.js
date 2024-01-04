@@ -1,4 +1,7 @@
-const MyChallenge = require('../models/myChallenge');
+const MyChallenge = require('../models/MyChallenge');
+const MyChallenges = require('../models/MyChallenges');
+
+
 const Uuid = require('uuid');
 
 exports.getAddChallenge = (req, res, next) => {
@@ -11,7 +14,31 @@ exports.getAddChallenge = (req, res, next) => {
 
     res.json([
         {
-          "id": id
+            "id": id
         }
-      ])
+    ])
+}
+
+exports.postAddMyChallenge = (req, res, next) => {
+    const description = req.body.description;
+
+    const challenge = {
+        id: Uuid.v4(),
+        description: description,
+        serialCode: "5"
+    }
+
+    // const myChallenges = new MyChallenges();
+    // const newSerialCode = myChallenges.getNewSerialCode(
+    //         (challengens) => {
+    //             console.log(challengens);
+    //         }
+    //     )
+
+    const myChallenge = new MyChallenge(challenge);
+    myChallenge.save();
+
+    res.json(challenge);
+
+    console.log('description:', description);
 }

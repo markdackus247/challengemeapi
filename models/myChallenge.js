@@ -1,18 +1,16 @@
 const { getDb } = require('../util/database/db');
 
-
 class MyChallenge {
-    constructor(id, description, serialCode) {
-        this.id = id;
-        this.description = description;
-        this.serialCode = serialCode;
+    constructor(myChallenge) {
+        this.myChallenge = myChallenge;
+        this.db = getDb();
+
     }
 
     save() {
-        const db = getDb();
-        db
+        this.db
             .collection('myChallenge')
-            .insertOne(this)
+            .insertOne(this.myChallenge)
             .then(
                 result => {
                     console.log('result', result);
