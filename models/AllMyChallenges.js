@@ -65,6 +65,29 @@ class AllMyChallenges {
                 throw err
             })
     }
+
+    // This method finds a challenge with a given id.
+    // It returns a challenge object.
+    findById(challengeId, callback) {
+        let challengeById;
+        
+        return this.db
+            .collection('myChallenge')
+            .findOne({id: challengeId})
+            .then(
+                challenge => {
+                    challengeById = new MyChallenge(challenge);
+                    callback(challengeById)
+                    return challengeById;
+                }
+            )
+            .catch(
+                err => {
+                    console.log(err);
+                    throw err;
+                }
+            )
+    }
 }
 
 module.exports = AllMyChallenges

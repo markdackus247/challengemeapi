@@ -30,6 +30,14 @@ class MyChallenge {
             );
 
     }
+
+    // This get() method returns the object informatie of the challenge (this.myChallenge).
+    get() {
+        return this.myChallenge;
+    }
+
+    
+
 }
 
 module.exports = MyChallenge;

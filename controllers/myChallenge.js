@@ -1,22 +1,32 @@
 const MyChallenge = require('../models/MyChallenge');
-const MyChallenges = require('../models/AllMyChallenges');
+const AllMyChallenges = require('../models/AllMyChallenges');
 
 const Uuid = require('uuid');
 
 
-exports.getAddChallenge = (req, res, next) => {
-    const id = Uuid.v4();
-    const description = "Ik kan een laptop gebruiksklaar maken.";
-    const serialCode = "5";
+exports.getChallenge = (req, res, next) => {
+    const id = req.params.id;
+    console.log('id:', id);
 
-    const myChallenge = new MyChallenge(id, description, serialCode);
-    myChallenge.save();
+    const myChallenges = new AllMyChallenges();
 
-    res.json([
-        {
-            "id": id
-        }
-    ])
+    myChallenges
+        .findById(id, 
+            challenge => {
+                console.log('challenge:', challenge)
+                return challenge
+            }    
+        )
+        .then(
+            challengeById => {
+                res.json(challengeById.get());
+            }
+        )
+        .catch(
+            err => {
+                console.log(err);
+            }
+        )
 }
 
 
