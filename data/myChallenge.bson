@@ -2,19 +2,45 @@
     {
         "_id": "15acf8db-a7e9-425a-a1bf-7d18098ec408",
         "description": "Ik kan een laptop gebruiksklaar maken.",
-        "code": "5",
+        "serialCode": "5",
         "crebo": [
             {
                 "_id": "7053f9cc-f408-44af-bced-e647033465fb",
                 "code": "25606",
                 "name": "Expert IT systems and devices",
-                "level": "4"
+                "level": "4",
+                "kerntaak": [
+                    {
+                        "_id": "75cc1a6c-5615-4e7b-a17f-3b4d84e60572",
+                        "code": "B1-K1",
+                        "werkproces": [
+                            {
+                                "_id": "5d2316e5-c9fd-4ed3-8965-06cfc7aaa305",
+                                "code": "B1-K1-W3",
+                                "shortName": "Beheren gebruikersdevices"
+                            }
+                        ]
+                    }
+                ]
             },
             {
                 "_id": "41e86c17-8ac1-4f2b-a9c0-80ec9f468904",
                 "code": "25605",
                 "name": "Allround medewerker IT systems and devices",
-                "level": "3"
+                "level": "3",
+                "kerntaak": [
+                    {
+                        "_id": "b1f78fe7-1846-4fc1-967d-0bba640c36e7",
+                        "code": "B1-K1",
+                        "werkproces": [
+                            {
+                                "_id": "1005dbbc-9d27-4be3-8475-359df621b08c",
+                                "code": "B1-K1-W3",
+                                "shortName": "Beheren gebruikersdevices"
+                            }
+                        ]
+                    }
+                ]
             }
         ],
         "assessmentCriteria": [

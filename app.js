@@ -7,6 +7,7 @@ const { mongoConnect } = require('./util/database/db');
 
 const indexRouter = require('./routes/index');
 const myChallenge = require('./routes/myChallenge');
+const allMyChallenges = require('./routes/allMyChallenges');
 
 const app = express();
 
@@ -18,10 +19,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/myChallenge', myChallenge);
+app.use('/myChallenges', allMyChallenges);
 
 
 mongoConnect(() => {
-    console.log('App.js connected to the DB');
+    console.log('Connected to the MongoDB Database.');
 })
 
 module.exports = app;

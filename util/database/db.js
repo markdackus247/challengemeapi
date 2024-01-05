@@ -22,7 +22,7 @@ let _db;
 const mongoConnect = (callback) => {
 
     connectionString = `mongodb://${dbUsername}:${dbPassword}@${dbHost}:${dbPort}/?authSource=${dbName}`
-    console.log(connectionString);
+    // console.log(connectionString);
 
     MongoClient
         .connect(
