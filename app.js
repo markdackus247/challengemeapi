@@ -6,8 +6,8 @@ const logger = require('morgan');
 const { mongoConnect } = require('./util/database/db');
 
 const indexRouter = require('./routes/index');
-const myChallenge = require('./routes/myChallenge');
-const allMyChallenges = require('./routes/allMyChallenges');
+const Challenge = require('./routes/challenge');
+const AllChallenges = require('./routes/allChallenges');
 
 const app = express();
 
@@ -18,8 +18,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/myChallenge', myChallenge);
-app.use('/myChallenges', allMyChallenges);
+app.use('/myChallenge', Challenge);
+app.use('/myChallenges', AllChallenges);
 
 
 mongoConnect(() => {

@@ -2,13 +2,13 @@ const express = require('express');
 const router = express.Router();
 
 const { 
-        postAddMyChallenge,
+        postAddChallenge,
         getChallenge
-    } = require('../controllers/myChallenge');
+    } = require('../controllers/challenge');
 
 // POST route for /myChallenge
 // example payload: { "description": "Ik een nieuwe mobiele telefoon gebruikersklaar maken en de oude gegevens mee overzetten." }
-router.post('/', postAddMyChallenge);
+router.post('/', postAddChallenge);
 
 // Get all information of one challenge given by the challenge id.
 // Example JSON body
