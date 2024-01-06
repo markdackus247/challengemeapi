@@ -1,9 +1,11 @@
-const AllChallenges = require('../models/AllChallenges');
+const {
+    fetchAll,
+    insertMany
+} = require('../models/AllChallenges');
 
 exports.getAllChallenges = (req, res, next) => {
     
-    AllChallenges
-        .fetchAll()
+    fetchAll()
         .then(
             challenges => {
                 // console.log('challenges:', challenges);
@@ -19,8 +21,8 @@ exports.postManyChallenges = (req, res, next) => {
     // console.log('req.body:', req.body);
     const newChallegens = req.body;
         
-    AllChallenges
-        .insertMany(newChallegens, 
+
+    insertMany(newChallegens, 
         result => {
             res.json(result);
         }

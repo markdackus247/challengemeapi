@@ -1,7 +1,9 @@
 const { getDb } = require('../util/database/db');
 
 const Uuid = require('uuid');
-const AllChallenges = require('./AllChallenges');
+const {
+        getNewSerialCode
+    } = require('./AllChallenges');
 
 class Challenge {
     constructor(myChallenge) {
@@ -19,31 +21,29 @@ class Challenge {
         if (!this.myChallenge.id) {
             this.myChallenge.id = Uuid.v4();
         }
-        
-        
-        AllChallenges
-            .getNewSerialCode(
-                (newSerialCode) => {
-                    this.myChallenge.serialCode = newSerialCode;
-    
-                    this.db
-                        .collection('myChallenge')
-                        .insertOne(this.myChallenge)
-                        .then(
-                            result => {
-                                callback(result);
-                                // console.log('result', result);
-                                return result;
-                            }
-                        )
-                        .catch(
-                            err => {
-                                console.log(err);
-                                throw err;
-                            }
-                        );
-                }
-            )
+
+        getNewSerialCode(
+            (newSerialCode) => {
+                this.myChallenge.serialCode = newSerialCode;
+
+                this.db
+                    .collection('myChallenge')
+                    .insertOne(this.myChallenge)
+                    .then(
+                        result => {
+                            callback(result);
+                            // console.log('result', result);
+                            return result;
+                        }
+                    )
+                    .catch(
+                        err => {
+                            console.log(err);
+                            throw err;
+                        }
+                    );
+            }
+        )
 
     }
 
@@ -52,8 +52,9 @@ class Challenge {
         return this.myChallenge;
     }
 
-    
+
 
 }
+
 
 module.exports = Challenge;
