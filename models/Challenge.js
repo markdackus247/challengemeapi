@@ -2,7 +2,8 @@ const { getDb } = require('../util/database/db');
 
 const Uuid = require('uuid');
 const {
-        getNewSerialCode
+        getNewSerialCode,
+        insertOne
     } = require('./AllChallenges');
 
 class Challenge {
@@ -17,34 +18,18 @@ class Challenge {
     // Other methods can be used to manipulate the object before writing to
     // the database.
     // This function returns a promise with te result of the insert information.
-    save(callback) {
-        if (!this.myChallenge.id) {
-            this.myChallenge.id = Uuid.v4();
-        }
-
-        getNewSerialCode(
-            (newSerialCode) => {
-                this.myChallenge.serialCode = newSerialCode;
-
-                this.db
-                    .collection('myChallenge')
-                    .insertOne(this.myChallenge)
-                    .then(
-                        result => {
-                            callback(result);
-                            // console.log('result', result);
-                            return result;
-                        }
-                    )
-                    .catch(
-                        err => {
-                            console.log(err);
-                            throw err;
-                        }
-                    );
-            }
-        )
-
+    async save() {
+        return insertOne(this.myChallenge)
+            .then(
+                result => {
+                    return result;
+                }
+            )
+            .catch(
+                err => {
+                    console.log(err);
+                }
+            )
     }
 
     // This get() method returns the object informatie of the challenge (this.myChallenge).

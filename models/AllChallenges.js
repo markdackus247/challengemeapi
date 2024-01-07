@@ -88,76 +88,6 @@ exports.findById = (challengeId, callback) => {
 }
 
 
-// // This function inserts many challenges at once.
-// // It uses the MyChallenge class to insert the challenges in the database.
-// exports.insertMany = (newChallenges, callback) => {
-
-//     let insertResult = [];
-//     const db = getDb();
-//     let newChallengeObject;
-
-
-//     db
-//         .collection('myChallenge')
-//         .find()
-//         .sort({ serialCode: -1 })
-//         .limit(1)
-//         .toArray()
-//         .then(
-//             challenges => {
-//                 if (challenges.length > 0)
-//                     return (Number(challenges[0].serialCode) + 1);
-//                 else {
-//                     return 1;
-//                 }
-//             }
-//         )
-//         .then(
-//             newSerialCode => {
-
-//                 for (let i = 0; i < newChallenges.length; i++) {
-//                     if (!newChallenges[i].id) {
-//                         newChallenges[i].id = Uuid.v4();
-//                     }
-//                     newChallenges[i].serialCode = newSerialCode;
-//                     // console.log(`newChallenges[${i}]`, newChallenges[i])
-//                     newSerialCode += 1;
-//                 }
-
-//                 console.log('newChallenges 1:', newChallenges);
-
-//                 return newChallenges;
-
-//             }
-//         )
-//         .then (
-//             newChallenges => {
-//                 db
-//                     .collection('myChallenge')
-//                     .insertMany(newChallenges)
-//                     .then(
-//                         result => {
-//                             callback(result);
-//                             // console.log('result', result);
-//                             return result;
-//                         }
-//                     )
-//                     .catch(
-//                         err => {
-//                             console.log(err);
-//                             throw err;
-//                         }
-//                     );
-//             }
-//         ) 
-//         .catch(
-//             err => {
-//                 console.log(err);
-//                 throw err;
-//             }
-//         )
-
-// }
 
 function addChallengeId(challenge) {
     if (!challenge.id) {
@@ -168,14 +98,16 @@ function addChallengeId(challenge) {
 }
 exports.addChallengeId = addChallengeId;
 
+
 function addSerialCode(challenge, serialCode) {
-    if(!challenge.serialCode) {
+    if (!challenge.serialCode) {
         challenge.serialCode = serialCode;
     }
 
     return challenge;
 }
 exports.addSerialCode = addSerialCode;
+
 
 async function getNewSerialCode() {
 
@@ -188,7 +120,7 @@ async function getNewSerialCode() {
         .toArray()
         .then(
             challenges => {
-                if (challenges.length > 0)              
+                if (challenges.length > 0)
                     return Number(challenges[0].serialCode) + 1;
                 else {
                     return 1;
@@ -204,74 +136,21 @@ async function getNewSerialCode() {
 }
 exports.getNewSerialCode = getNewSerialCode;
 
-async function insertOneIntoDB(challenge) {
+
+async function insertOne(challenge, serialCode = null) {
+    challenge = addChallengeId(challenge);
 
     const db = getDb();
-    return db
-        .collection('myChallenge')
-        .insertOne(challenge)
-        .then(
-            result => {
-                return result;
-            }
-        )
-        .catch(
-            err => {
-                console.log(err);
-                throw err;
-            }
-        );
-}
-exports.insertOneIntoDB = insertOneIntoDB;
 
-async function insertOne(challenge) {
-    let result;
+    if (serialCode) {
+        challenge = addSerialCode(challenge, serialCode);
 
-    return getNewSerialCode()
-        .then(
-            newSerialCode => {
-                console.log('New serialCode generated 2:', newSerialCode);
-                
-                challenge = addChallengeId(challenge);
-                challenge = addSerialCode(challenge, newSerialCode);
-
-                // console.log('challenge:', challenge)
-
-                return insertOneIntoDB(challenge)
-                    .then(
-                        insertResult => {
-                            result = insertResult;
-                            return insertResult;
-                        }
-                    )
-                    .catch(
-                        err => {
-                            console.log(err);
-                            throw err;
-                        }
-                    )  
-            }
-        )
-        .catch(
-            err =>{
-                console.log(err);
-            }
-        )
-
-}
-exports.insertOne = insertOne;
-
-async function insertMany(challenges) {
-    
-    let insertResults = []
-
-    for(let challenge of challenges) {
-        console.log('in inserMany()',challenge);
-        insertOne(challenge)
+        return db
+            .collection('myChallenge')
+            .insertOne(challenge)
             .then(
-                insertResult => {
-                    console.log('insertResult', insertResult);
-                    insertResults.push(insertResult);
+                result => {
+                    return result;
                 }
             )
             .catch(
@@ -279,10 +158,81 @@ async function insertMany(challenges) {
                     console.log(err);
                     throw err;
                 }
-            )
-    }
+            );
+    } else {
+        return getNewSerialCode()
+            .then(
+                newSerialCode => {
+                    console.log('New serialCode generated in insertOne:', newSerialCode);
 
-    return insertResults;
+                    challenge = addSerialCode(challenge, newSerialCode);
+
+                    return db
+                        .collection('myChallenge')
+                        .insertOne(challenge)
+                        .then(
+                            result => {
+                                return result;
+                            }
+                        )
+                        .catch(
+                            err => {
+                                console.log(err);
+                                throw err;
+                            }
+                        );
+                }
+            )
+            .catch(
+                err =>{
+                    console.log(err);
+                }
+            )
+
+    }
+}
+exports.insertOne = insertOne;
+
+
+async function insertMany(challenges) {
+
+    const insertResults = [];
+    let indexNewSerialCode;
+
+    return getNewSerialCode()
+        .then(
+            newSerialCode => {
+                console.log('New serialCode generated 2:', newSerialCode);
+                indexNewSerialCode = Number(newSerialCode) - 1;
+                // console.log('challenge:', challenge)
+
+                for (let challenge of challenges) {
+                    console.log('in inserMany()', challenge);
+                    indexNewSerialCode += 1;
+                    insertOne(challenge, indexNewSerialCode)
+                        .then(
+                            insertResult => {
+                                console.log('insertResult', insertResult);
+                                insertResults.push(insertResult);
+                            }
+                        )
+                        .catch(
+                            err => {
+                                console.log(err);
+                                throw err;
+                            }
+                        )
+                }
+
+                console.log('insertResults:', insertResults);
+                return insertResults;
+            }
+        )
+        .catch(
+            err =>{
+                console.log(err);
+            }
+        )
 
 }
 exports.insertMany = insertMany;

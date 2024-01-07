@@ -35,7 +35,6 @@ exports.postAddChallenge = (req, res, next) => {
     let sourceId;
 
     let challenge = {
-        id: Uuid.v4(),
         description: description,
     }
 
@@ -45,11 +44,19 @@ exports.postAddChallenge = (req, res, next) => {
     };
 
     const newChallenge = new Challenge(challenge);
-    newChallenge.save(
-        result => {
-            res.json(result);
-        }
-    );
+    newChallenge
+        .save()
+        .then(
+            result => {
+                res.json(result)
+            }
+        )
+        .catch(
+            err => {
+                console.log(err);
+            }
+        )
+
 
     console.log('description:', description);
 }
