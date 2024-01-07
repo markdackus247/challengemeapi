@@ -3,48 +3,10 @@ const Challenge = require('./Challenge');
 
 const Uuid = require('uuid');
 
-// This function gets the latest used serialCode and adds one to it.
-// Its starts counting on 1.
-// Its uses a call back function so other actions can be nested in it.
-// But is also returns the new serialCode.
-// async function getNewSerialCode(callback) {
-//     let newSerialCode;
-
-//     const db = getDb();
-//     return db
-//         .collection('myChallenge')
-//         .find()
-//         .sort({ serialCode: -1 })
-//         .limit(1)
-//         .toArray()
-//         .then(
-//             challenges => {
-//                 if (challenges.length > 0)
-//                     return newSerialCode = (Number(challenges[0].serialCode) + 1);
-//                 else {
-//                     return newSerialCode = 1;
-//                 }
-//             }
-//         )
-//         .then(
-//             newSerialCode => {
-//                 console.log('New serialCode generated:', newSerialCode);
-//                 callback(newSerialCode);
-//                 return newSerialCode
-//             }
-//         )
-//         .catch(
-//             err => {
-//                 console.log(err);
-//                 throw err;
-//             }
-//         )
-// }
-// exports.getNewSerialCode = getNewSerialCode;
-
-// This method can be used to fetch all the challenges of 
-// the user.
-exports.fetchAll = () => {
+// fetchAll() fetches all the challenges from the collection.
+// It returns all the challenges in JSON format.
+// Function is asynchronous because it does a call to the database.
+async function fetchAll() {
 
     const db = getDb();
     return db
@@ -59,10 +21,12 @@ exports.fetchAll = () => {
             throw err
         })
 }
+exp
 
-// This method finds a challenge with a given id.
+// findById selects the challenge with the given id from the collection.
 // It returns a challenge object.
-exports.findById = (challengeId, callback) => {
+// Function is asynchronouse because it does a call to the database.
+async function findById(challengeId) {
 
     console.log('challengeId', challengeId);
 
@@ -74,8 +38,6 @@ exports.findById = (challengeId, callback) => {
         .then(
             challenge => {
                 console.log('challenge findOne', challenge);
-                // challengeById = new Challenge(challenge);
-                callback(challenge)
                 return challenge;
             }
         )
@@ -86,9 +48,10 @@ exports.findById = (challengeId, callback) => {
             }
         )
 }
+exports.findById = findById;
 
-
-
+// addChallengeId adds an id to a challenge object if it not exists
+// and returns the challenge object with a extra id field.
 function addChallengeId(challenge) {
     if (!challenge.id) {
         challenge.id = Uuid.v4();
@@ -98,7 +61,8 @@ function addChallengeId(challenge) {
 }
 exports.addChallengeId = addChallengeId;
 
-
+// addSerialCode adds a serialCode to the challenge.
+// It returns the challenge object with a extra serialCode field.
 function addSerialCode(challenge, serialCode) {
     if (!challenge.serialCode) {
         challenge.serialCode = serialCode;
@@ -108,7 +72,13 @@ function addSerialCode(challenge, serialCode) {
 }
 exports.addSerialCode = addSerialCode;
 
-
+// getNewSerialCode does a request on the myChallenge collection
+// and sorts it by the serialCode. It fetches the first document
+// with the highest serialCode. It returns this number.
+// If there is no serialCode this function returns is 1.
+// This function is asynchornous.
+// NB This function has a delay because of the asynchronous.
+// NB Don't use this function therefore in a loop.
 async function getNewSerialCode() {
 
     const db = getDb();
@@ -184,7 +154,7 @@ async function insertOne(challenge, serialCode = null) {
                 }
             )
             .catch(
-                err =>{
+                err => {
                     console.log(err);
                 }
             )
@@ -229,7 +199,7 @@ async function insertMany(challenges) {
             }
         )
         .catch(
-            err =>{
+            err => {
                 console.log(err);
             }
         )

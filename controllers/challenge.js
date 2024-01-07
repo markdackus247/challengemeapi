@@ -1,8 +1,8 @@
 const Challenge = require('../models/Challenge');
 
 const {
-    findById
-} = require('../models/AllChallenges');
+        findById
+    } = require('../models/AllChallenges');
 
 const Uuid = require('uuid');
 
@@ -11,22 +11,18 @@ exports.getChallenge = (req, res, next) => {
     const id = req.params.id;
     console.log('id:', id);
 
-    findById(id, 
-        challenge => {
-            console.log('challenge:', challenge)
-            return challenge
-        }    
-    )
-    .then(
-        challenge => {
-            res.json(challenge);
-        }
-    )
-    .catch(
-        err => {
-            console.log(err);
-        }
-    )
+    findById(id)
+        .then(
+            challenge => {
+                res.json(challenge);
+            }
+        )
+        .catch(
+            err => {
+                console.log(err);
+                throw err;
+            }
+        )
 }
 
 

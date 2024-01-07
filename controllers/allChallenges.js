@@ -36,11 +36,4 @@ exports.postManyChallenges = (req, res, next) => {
             }
         );
 
-
-    // // This code works but is not async.
-    // insertMany(newChallegens, 
-    //     result => {
-    //         res.json(result);
-    //     }
-    // )
 }
