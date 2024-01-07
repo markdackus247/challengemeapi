@@ -1,6 +1,8 @@
 const {
     fetchAll,
-    insertMany
+    insertMany,
+    addMany,
+    insertOne
 } = require('../models/AllChallenges');
 
 exports.getAllChallenges = (req, res, next) => {
@@ -20,11 +22,25 @@ exports.getAllChallenges = (req, res, next) => {
 exports.postManyChallenges = (req, res, next) => {
     // console.log('req.body:', req.body);
     const newChallegens = req.body;
-        
 
-    insertMany(newChallegens, 
-        result => {
-            res.json(result);
-        }
-    )
+    insertMany(newChallegens)
+        .then(
+            ch => {
+                console.log('ch:', ch);
+                res.json(ch);
+            }
+        )
+        .catch(
+            err => {
+                console.log(err)
+            }
+        );
+
+
+    // // This code works but is not async.
+    // insertMany(newChallegens, 
+    //     result => {
+    //         res.json(result);
+    //     }
+    // )
 }
