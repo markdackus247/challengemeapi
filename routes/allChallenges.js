@@ -12,6 +12,8 @@ router.get('/', getAllChallenges);
 
 // This POST route can be used to insert more challenges into the database.
 // It is a array of challenge objects.
-router.post('/', postManyChallenges)
+router.post('/', postManyChallenges);
+
+// router.delete('/', deleteAllChallenges);
 
 module.exports = router;

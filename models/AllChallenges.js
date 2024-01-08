@@ -210,6 +210,9 @@ exports.insertMany = insertMany;
 
 // deleteOne deletes one challenge of the collection
 async function deleteOne(id) {
+    
+    const db = getDb();
+
     return db
         .collection('myChallenge')    
         .deleteOne(
@@ -228,3 +231,23 @@ async function deleteOne(id) {
         )
 }
 exports.deleteOne = deleteOne;
+
+async function deleteAll() {
+    const db = getDb();
+
+    return db
+        .collection('myChallenge')
+        .deleteMany({})
+        .then(
+            deleteResult => {
+                return deleteResult;
+            }
+        )
+        .catch(
+            err => {
+                console.log(err);
+                throw err;
+            }
+        )    
+}
+exports.deleteAll = deleteAll;

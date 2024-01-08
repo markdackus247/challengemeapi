@@ -43,9 +43,9 @@ class Challenge {
             return findById(id)
                 .then(
                     challenge => {
-                        this.challenge = challenge;
+                        this.myChallenge = challenge;
                         console.log('this.challenge', challenge);
-                        return this.challenge;
+                        return this.myChallenge;
                     }
 
                 )
@@ -58,8 +58,8 @@ class Challenge {
         }
     }
 
-    async delete(id) {
-        return deleteOne(id)
+    async delete() {
+        return deleteOne(this.myChallenge.id)
             .then(
                 delResult => {
                     this.challenge = null;

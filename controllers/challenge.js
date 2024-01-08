@@ -57,14 +57,29 @@ exports.postAddChallenge = (req, res, next) => {
     console.log('description:', description);
 }
 
-const deleteChallenge = (req, res, next) => {
-    const id = req.body.id;
+exports.deleteChallenge = (req, res, next) => {
+    const id = req.params.id;
+    console.log('id at controllers:', id);
     const challenge = new Challenge();
     challenge
         .get(id)
         .then(
-            delResult => {
-                res.json(delResult);
+            getResult => {
+                challenge
+                    .delete()
+                    .then(
+                        delResult => {
+                            res.json({delResult})
+                        }
+                    )
+                    .catch(
+                        err => {
+                            console.log(err);
+                            throw err;
+                        }
+                    )
+
+
             }
         )
         .catch(
@@ -74,4 +89,3 @@ const deleteChallenge = (req, res, next) => {
             }
         )
 }
-exports.deleteChallenge = deleteChallenge;
