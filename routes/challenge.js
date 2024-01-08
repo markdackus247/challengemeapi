@@ -3,7 +3,8 @@ const router = express.Router();
 
 const { 
         postAddChallenge,
-        getChallenge
+        getChallenge,
+        deleteChallenge
     } = require('../controllers/challenge');
 
 // POST route for /myChallenge
@@ -15,6 +16,9 @@ router.post('/', postAddChallenge);
 // {
 //     "id": "cbf01c76-5eed-4be6-90d7-9802910b9513"
 // }
-router.get('/:id', getChallenge)
+router.get('/:id', getChallenge);
+
+// Delete route for deleting a challenge from the collection.
+router.delete('/:id', deleteChallenge);
 
 module.exports = router;

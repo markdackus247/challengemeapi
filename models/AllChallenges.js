@@ -21,7 +21,7 @@ async function fetchAll() {
             throw err
         })
 }
-exp
+
 
 // findById selects the challenge with the given id from the collection.
 // It returns a challenge object.
@@ -206,3 +206,25 @@ async function insertMany(challenges) {
 
 }
 exports.insertMany = insertMany;
+
+
+// deleteOne deletes one challenge of the collection
+async function deleteOne(id) {
+    return db
+        .collection('myChallenge')    
+        .deleteOne(
+            { id: id }
+        )
+        .then(
+            delResult => {
+                return delResult;
+            }
+        )
+        .catch(
+            err => {
+                console.log(err);
+                throw err;
+            }
+        )
+}
+exports.deleteOne = deleteOne;
