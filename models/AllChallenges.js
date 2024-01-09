@@ -21,6 +21,7 @@ async function fetchAll() {
             throw err
         })
 }
+exports.fetchAll = fetchAll;
 
 
 // findById selects the challenge with the given id from the collection.
@@ -166,12 +167,13 @@ exports.insertOne = insertOne;
 
 async function insertMany(challenges) {
 
-    const insertResults = [];
     let indexNewSerialCode;
 
     return getNewSerialCode()
         .then(
             newSerialCode => {
+                const insertResults = [];
+
                 console.log('New serialCode generated 2:', newSerialCode);
                 indexNewSerialCode = Number(newSerialCode) - 1;
                 // console.log('challenge:', challenge)
@@ -179,11 +181,13 @@ async function insertMany(challenges) {
                 for (let challenge of challenges) {
                     console.log('in inserMany()', challenge);
                     indexNewSerialCode += 1;
+
                     insertOne(challenge, indexNewSerialCode)
                         .then(
                             insertResult => {
-                                console.log('insertResult', insertResult);
+                                console.log('insertResult 1', insertResult);
                                 insertResults.push(insertResult);
+                                return insertResult;
                             }
                         )
                         .catch(
@@ -192,10 +196,11 @@ async function insertMany(challenges) {
                                 throw err;
                             }
                         )
+                    console.log('insertResults 3', insertResults);
                 }
 
-                console.log('insertResults:', insertResults);
                 return insertResults;
+
             }
         )
         .catch(
@@ -232,6 +237,8 @@ async function deleteOne(id) {
 }
 exports.deleteOne = deleteOne;
 
+// deleteAll removes all challenges from the collection.
+// It returns the results from the database to return.
 async function deleteAll() {
     const db = getDb();
 
@@ -251,3 +258,29 @@ async function deleteAll() {
         )    
 }
 exports.deleteAll = deleteAll;
+
+async function updateOne(id, challenge) {
+    const db = getDb();
+
+    return db
+        .collection('myChallenge')
+        .updateOne(
+            {id: id},
+            {
+                $set: {description: challenge.description},
+                $currentDate: { lastModified: true }
+            }
+        )
+        .then(
+            updateResult => {
+                return updateResult;
+            }
+        )
+        .catch(
+            err => {
+                console.log(err);
+                throw err;
+            }
+        )
+}
+exports.updateOne = updateOne;

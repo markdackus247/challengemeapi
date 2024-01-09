@@ -1,8 +1,8 @@
 const {
     fetchAll,
     insertMany,
-    addMany,
-    insertOne
+    insertOne,
+    deleteAll
 } = require('../models/AllChallenges');
 
 exports.getAllChallenges = (req, res, next) => {
@@ -36,4 +36,20 @@ exports.postManyChallenges = (req, res, next) => {
             }
         );
 
+}
+
+exports.deleteAllChallenges = (req, res, next) => {
+    
+    deleteAll()
+        .then(
+            deleteResult => {
+                res.json(deleteResult);
+            }
+        )
+        .catch(
+            err => {
+                console.log(err);
+                throw err;
+            }
+        )
 }

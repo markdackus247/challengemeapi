@@ -5,7 +5,8 @@ const {
     getNewSerialCode,
     insertOne,
     deleteOne,
-    findById
+    findById,
+    updateOne
 } = require('./AllChallenges');
 
 class Challenge {
@@ -30,6 +31,7 @@ class Challenge {
             .catch(
                 err => {
                     console.log(err);
+                    throw err;
                 }
             )
     }
@@ -69,9 +71,25 @@ class Challenge {
             .catch(
                 err => {
                     console.log(err);
+                    throw err;
                 }
             )
 
+    }
+
+    async update() {
+        return updateOne(this.myChallenge.id, this.myChallenge)
+            .then(
+                updateResult => {
+                    return updateResult;
+                }
+            )
+            .catch(
+                err => {
+                    console.log(err);
+                    throw err;
+                }
+            )
     }
 
 }

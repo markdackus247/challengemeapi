@@ -3,7 +3,8 @@ const router = express.Router();
 
 const { 
     getAllChallenges,
-    postManyChallenges 
+    postManyChallenges,
+    deleteAllChallenges 
 } = require('../controllers/allChallenges');
 
 // This GET route can be used to retrieve an json array with all the challenges of the user.
@@ -14,6 +15,8 @@ router.get('/', getAllChallenges);
 // It is a array of challenge objects.
 router.post('/', postManyChallenges);
 
-// router.delete('/', deleteAllChallenges);
+// This DELETE route is used to delete all the challenges of the student.
+// It shut never been used in the production environment.
+router.delete('/', deleteAllChallenges);
 
 module.exports = router;
