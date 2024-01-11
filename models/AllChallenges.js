@@ -1,5 +1,4 @@
 const getDb = require('../util/database/db').getDb;
-const Challenge = require('./Challenge');
 
 const Uuid = require('uuid');
 
@@ -262,12 +261,17 @@ exports.deleteAll = deleteAll;
 async function updateOne(id, challenge) {
     const db = getDb();
 
+    // console.log('challenge.description', challenge.description);
+
     return db
         .collection('myChallenge')
         .updateOne(
             {id: id},
             {
-                $set: {description: challenge.description},
+                $set: {
+                    description: challenge.description,
+                    serialCode: challenge.serialCode
+                },
                 $currentDate: { lastModified: true }
             }
         )

@@ -2,7 +2,6 @@ const { getDb } = require('../util/database/db');
 
 const Uuid = require('uuid');
 const {
-    getNewSerialCode,
     insertOne,
     deleteOne,
     findById,
@@ -13,6 +12,7 @@ class Challenge {
     constructor(myChallenge) {
         this.myChallenge = myChallenge;
         this.db = getDb();
+        this.updateCollection = false;
 
     }
 
@@ -22,18 +22,36 @@ class Challenge {
     // the database.
     // This function returns a promise with te result of the insert information.
     async save() {
-        return insertOne(this.myChallenge)
-            .then(
-                result => {
-                    return result;
-                }
-            )
-            .catch(
-                err => {
-                    console.log(err);
-                    throw err;
-                }
-            )
+        if (this.updateCollection) {
+            return updateOne(this.myChallenge.id, this.myChallenge)
+                .then(
+                    updateResult => {
+                        this.updateCollection = false;
+                        return updateResult;
+                    }
+                )
+                .catch(
+                    err => {
+                        console.log(err);
+                        throw err;
+                    }
+                )
+        }
+        else {
+            return insertOne(this.myChallenge)
+                .then(
+                    result => {
+                        return result;
+                    }
+                )
+                .catch(
+                    err => {
+                        console.log(err);
+                        throw err;
+                    }
+                )
+        }
+
     }
 
     // This get() method returns the object informatie of the challenge (this.myChallenge).
@@ -77,19 +95,22 @@ class Challenge {
 
     }
 
-    async update() {
-        return updateOne(this.myChallenge.id, this.myChallenge)
-            .then(
-                updateResult => {
-                    return updateResult;
-                }
-            )
-            .catch(
-                err => {
-                    console.log(err);
-                    throw err;
-                }
-            )
+    // update method only updates the myChallenge object.
+    // Only two field can be updated. The description and the serialCode field.
+    // Other field will not be changed or edit.
+    // the this.updateCollection variable is used by the save() function.
+    update(newChallenge) {
+        this.updateCollection = true;
+        console.log('newChallenge.serialCode', newChallenge.serialCode);
+
+        if (newChallenge.description){
+            this.myChallenge.description = newChallenge.description;
+        }
+
+        if(newChallenge.serialCode){
+            this.myChallenge.serialCode = newChallenge.serialCode;
+        }
+        
     }
 
 }

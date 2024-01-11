@@ -89,3 +89,38 @@ exports.deleteChallenge = (req, res, next) => {
             }
         )
 }
+
+// This function makes a new empty challenge object.
+// 
+exports.updateChallenge = (req, res, next) => {
+    const id = req.params.id;
+    const newChallenge = req.body;
+    console.log('id in updatechallenge()', id);
+    const challenge = new Challenge();
+    challenge.get(id)
+        .then(
+            currentChallenge => {
+                challenge.update(newChallenge);
+                challenge.save()
+                    .then(
+                        updateResult => {
+                            res.json(updateResult);
+                        }
+                    )
+                    .catch(
+                        err => {
+                            console.log(err);
+                            throw err;
+                        }
+                    )
+
+            }
+        )
+        .catch(
+            err => {
+                console.log(err);
+                throw err;
+            }
+        )
+
+}
