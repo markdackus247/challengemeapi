@@ -8,6 +8,7 @@ const { mongoConnect } = require('./util/database/db');
 const indexRouter = require('./routes/index');
 const Challenge = require('./routes/challenge');
 const AllChallenges = require('./routes/allChallenges');
+const CreboMan = require('./routes/CreboMan');
 
 const app = express();
 
@@ -20,6 +21,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/myChallenge', Challenge);
 app.use('/myChallenges', AllChallenges);
+app.use('/creboman', CreboMan);
 
 
 mongoConnect(() => {
