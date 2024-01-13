@@ -89,12 +89,13 @@ async function insertOne(newCrebo) {
 
     // Insert the newCrebo object into the crebo collection.
     db = getDb();
-    db
+     return db
         .collection('crebo')
         .insertOne(newCrebo)
         .then(
             insertResult => {
-                console.log('insertResult in CreboMan.js>insertOne>then', insertResult);
+                // console.log('insertResult in CreboMan.js>insertOne>then', insertResult);
+                // console.log('insertResultObject in CremoMan.js>insertOne>then', insertOneReturnObject([newCrebo]));
                 return insertOneReturnObject([newCrebo]);
             }
         )
@@ -110,9 +111,12 @@ async function insertOne(newCrebo) {
                         source: "AllCrebos/insertOne/crebo"
                     }])
 
-                const error = new Error(errMessage);
+                // console.log('models>CreboMan>insertOne>catch()>errMessage', errMessage);
+
+                const error = new Error(JSON.stringify(errMessage));
+                // console.log('models>CreboMan>insertOne>catch()>error', error);
                 
-                return error;
+                throw error;
             }
         )
 }

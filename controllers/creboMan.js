@@ -1,6 +1,6 @@
 const CreboMan = require('../models/CreboMan');
 
-exports.insertOne = (req, res, next, err) => {
+exports.insertOne = (req, res, next) => {
     const creboObject = req.body;
 
     CreboMan

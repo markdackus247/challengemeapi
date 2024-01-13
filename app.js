@@ -23,6 +23,11 @@ app.use('/myChallenge', Challenge);
 app.use('/myChallenges', AllChallenges);
 app.use('/creboman', CreboMan);
 
+app.use((error, req, res, next) => {
+    console.log('app.js>app.use>error', JSON.parse(error.message));
+    res.json(JSON.parse(error.message));
+})
+
 
 mongoConnect(() => {
     console.log('Connected to the MongoDB Database.');
