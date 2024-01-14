@@ -36,6 +36,7 @@ const ErrObject = {
     errors: [               // Type array, more errors can be returned to the client.
         {
             code: null,     // Type string, example "NotNull"
+            message: null,  // Type string, example "Password is to short.", 
             detail: null,   // Type string, detailed information for the user.
             source: null    // Type string, example "creboModel/Delete"
         }
@@ -107,6 +108,7 @@ async function insertOne(newCrebo) {
                 errMessage = insertOneErr(
                     [{
                         code: "SaveDb",
+                        message: "Cannot save the information.",
                         detail: "Unable to save the information because of connection problems.",
                         source: "AllCrebos/insertOne/crebo"
                     }])
