@@ -1,4 +1,4 @@
-const CreboMan = require('../models/CreboMan');
+const CreboMan = require('../models/CreboMan/index');
 
 exports.insertOne = (req, res, next) => {
     const creboObject = req.body;
@@ -7,6 +7,7 @@ exports.insertOne = (req, res, next) => {
         .insertOne(creboObject)
         .then(
             insertResult => {
+                console.log('controllers>creboMan.js>insertOne>InsertOne<then', insertResult);
                 res.json(insertResult);
             }
         )
