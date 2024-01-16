@@ -1,8 +1,9 @@
 const getDb = require('../../util/database/db').getDb;
-const CreboObject = require('./schema');
+const CreboModel = require('./schema');
 const ErrObject = require('./error');
 
 const Uuid = require('uuid');
+
 
 // CreboDbReturnObject is the schema of the returning object after the operations.
 // The returning object has always the same structure.
@@ -33,6 +34,7 @@ function insertOneErr(errArray) {
     return errorMessage;
 }
 
+
 // insertOneReturnObject will generate a default object for database management.
 // it converts the MongoDB return object to a default object.
 function insertOneReturnObject(newCreboObjectArray) {
@@ -61,17 +63,17 @@ async function insertOne(newCrebo) {
         newCrebo.id = id;
     }
 
+    console.log(`models>CreboMan>insertOne: ${newCrebo.id}`);
     // Insert the newCrebo object into the crebo collection.
-    db = getDb();
-     return db
-        .collection('crebo')
-        .insertOne(newCrebo)
+    const crebo = new CreboModel(newCrebo);
+    crebo
+        .save()
         .then(
             insertResult => {
                 console.log('insertResult in CreboMan.js>insertOne>then', insertResult);
                 // console.log('insertResultObject in CremoMan.js>insertOne>then', insertOneReturnObject([newCrebo]));
                 return insertOneReturnObject([newCrebo]);
-            }
+            }            
         )
         .catch(
             err => {
@@ -81,18 +83,19 @@ async function insertOne(newCrebo) {
                 errMessage = insertOneErr(
                     [{
                         code: "SaveDb",
-                        message: "Cannot save the information.",
+                        // message: "Cannot save the information.",
                         detail: "Unable to save the information because of connection problems.",
                         source: "AllCrebos/insertOne/crebo"
                     }])
 
-                // console.log('models>CreboMan>insertOne>catch()>errMessage', errMessage);
+                console.log('models>CreboMan>insertOne>catch()>errMessage', errMessage);
 
                 const error = new Error(JSON.stringify(errMessage));
                 // console.log('models>CreboMan>insertOne>catch()>error', error);
                 
                 throw error;
-            }
+            }            
         )
+
 }
 exports.insertOne = insertOne;
