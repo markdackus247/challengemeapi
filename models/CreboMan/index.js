@@ -1,6 +1,8 @@
-InsertOne  = require('./insertOne');
+getAll = require('./getAll');
+insertOne = require('./insertOne');
 
-module.exports = InsertOne;
+module.exports = insertOne;
+module.exports = getAll;
 
 // updateOne updates one crebo document from the crebo collection.
 // updatedCrebo parameter is a object with all the updated crebo information. The id
@@ -38,11 +40,7 @@ async function insertMany(newCreboArray) {
 exports.insertMany = insertMany;
 
 
-// getAll fetches all documents from the crebo collection.
-async function getAll() {
 
-}
-exports.getAll = getAll;
 
 
 // deleteAll deletes all documents from the crebo collection.

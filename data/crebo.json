@@ -1,0 +1,128 @@
+{
+    "code": "25606",
+    "level": "4",
+    "name": "Expert IT systems and devices",
+    "description": "De Expert IT systems and devices werkt zelfstandig op de ICT afdeling van een organisatie of in een servicedeskomgeving. Hij/zij heeft oog voor de organisatie en bezit een helikopterview. Hij/zij communiceert met alle betrokkenen. Naast het beheren van de IT infrastructuur, applicaties en devices houdt de Expert IT systems and devices zich bezig met het beveiligen van informatiesystemen. Hij/zij geeft security advies, verbetert de security van systemen en reageert op cybersecurity aanvallen. Ook heeft de Expert IT systems and devices een rol bij het communiceren over wensen van opdrachtgevers en het vertalen van deze wensen naar aanpassingen of vernieuwingen in de IT infrastructuur of applicaties. Het kunnen werken met databases en programmeerervaring speelt hierin een rol.",
+    "sbblink": "https://kwalificatie-mijn.s-bb.nl/kwalificatie/expert-it-systems-and-devices/cmVzdWx0YWF0VHlwZT01O2Rvc3NpZXJJZD01MTMwO2t3YWxpZmljYXRpZUlkPTEzMjE0NzY=",
+    "kdpdflink": "https://kwalificatie-mijn.s-bb.nl/Details/DownloadDocument/1402198",
+    "fileCode": "23244",
+    "kerntaken": [
+        {
+            "code": "B1-K1",
+            "part": "basisdeel",
+            "name": "Ondersteunt gebuikers",
+            "informalName": "Gebruikers ondersteunen",
+            "description": "Het werk van de beginnend beroepsbeoefenaar is ...",
+            "werkprocessen": [
+                {
+                    "code": "B1-K1-W1",
+                    "name": "Handelt meldingen af",
+                    "informalName": "Meldingen afhandelen",
+                    "description" : "De beginnend beroepsbeoefenaar ..."
+                },
+                {
+                    "code": "B1-K1-W2",
+                    "name": "Instrueert gebruikers",
+                    "informalName": "Gebruikers instrueren",
+                    "description" : "De beginnend beroepsbeoefenaar ..."
+                },
+                {
+                    "code": "B1-K1-W3",
+                    "name": "Installeert, configureert en beheert gebruikersdevices",
+                    "informalName": "Gebruikersdevices beheren",
+                    "description" : "De beginnend beroepsbeoefenaar ..."
+                }
+            ]
+        },
+        {
+            "code": "B1-K2",
+            "part": "basisdeel",
+            "name": "Beheert de infrastructuur",
+            "informalName": "Instrastructuur beheren",
+            "description": "Het werk van de beginnend beroepsbeoefenaar is ...",
+            "werkprocessen": [
+                {
+                    "code": "B1-K2-W1",
+                    "name": "Installeert en configureert netwerk- en infrastructuuronderdelen",
+                    "informalName": "Infrastructuuronderdelen installeren",
+                    "description" : "De beginnend beroepsbeoefenaar ..."
+                },
+                {
+                    "code": "B1-K2-W2",
+                    "name": "Beheert en monitort netwerk- en infrastructuuronderdelen",
+                    "informalName": "Infrastructuuronderdelen beheren",
+                    "description" : "De beginnend beroepsbeoefenaar ..."
+                }
+            ]
+        },
+        {
+            "code": "B1-K3",
+            "part": "basisdeel",
+            "name": "Beheert applicaties",
+            "informalName": "Applicaties beheren",
+            "description": "Het werk van de beginnend beroepsbeoefenaar is ...",
+            "werkprocessen": [
+                {
+                    "code": "B1-K3-W1",
+                    "name": "Adviseert, over, installeert en configureert applicaties",
+                    "informalName": "Applicaties configureren",
+                    "description" : "De beginnend beroepsbeoefenaar ..."
+                },
+                {
+                    "code": "B1-K2-W2",
+                    "name": "Onderhoudt applicaties",
+                    "informalName": "Applicaties beheren",
+                    "description" : "De beginnend beroepsbeoefenaar ..."
+                }
+            ]
+        },
+        {
+            "code": "P2-K1",
+            "part": "profieldeel",
+            "name": "Ontwikkelt digitale informatievoorzieningen",
+            "informalName": "Ontwerpen en ontwikkelen",
+            "description": "Het werk van de beginnend beroepsbeoefenaar is ...",
+            "werkprocessen": [
+                {
+                    "code": "P2-K1-W1",
+                    "name": "Ontwerpt een informatievoorziening",
+                    "informalName": "Ontwerpen",
+                    "description" : "De beginnend beroepsbeoefenaar ..."
+                },
+                {
+                    "code": "P2-K1-W2",
+                    "name": "Automatiseert processen",
+                    "informalName": "Automatiseren",
+                    "description" : "De beginnend beroepsbeoefenaar ..."
+                },
+                {
+                    "code": "P2-K1-W3",
+                    "name": "Beheert databases",
+                    "informalName": "Databases beheren",
+                    "description" : "De beginnend beroepsbeoefenaar ..."
+                }
+            ]
+        },
+        {
+            "code": "P2-K2",
+            "part": "profieldeel",
+            "name": "Controleert de security",
+            "informalName": "Security",
+            "description": "Het werk van de beginnend beroepsbeoefenaar is ...",
+            "werkprocessen": [
+                {
+                    "code": "P2-K2-W1",
+                    "name": "Geeft security advies en verbetert de security.",
+                    "informalName": "Security verbeteren",
+                    "description" : "De beginnend beroepsbeoefenaar ..."
+                },
+                {
+                    "code": "P2-K1-W2",
+                    "name": "Reageert op security incidenten",
+                    "informalName": "Security incidenten",
+                    "description" : "De beginnend beroepsbeoefenaar ..."
+                }
+            ]
+        }
+    ]
+}

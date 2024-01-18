@@ -3,8 +3,12 @@ const router = express.Router();
 
 const creboMan = require('../controllers/creboMan');
 
-// This route calls a controller function to insert a document
-// in the crebo collection.
+// POST /creboman
+// Router for inserting one new education.
 router.post('/', creboMan.insertOne);
+
+// GET /creboman
+// Router for fetching all documents of the eductions.
+router.get('/', creboMan.getAll);
 
 module.exports = router;

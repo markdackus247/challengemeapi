@@ -4,16 +4,85 @@ const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
 const {UUID, String} = Schema.Types;
 
-const CreboSchema = new Schema({
-    _id: {
-        type: ObjectId,
-        required: true
-    },
+const Uuid = require('uuid');
+
+
+const WerkprocesSchema = new Schema({
     id: {
         type: UUID,
         unique: true,
         required: true,
-        immutable: true
+        default: Uuid.v4()
+    },
+    code: {
+        type: String,
+        required: true,
+    },    
+    name: {
+        type: String,
+        required: true,
+    },
+    informalName: {
+        type: String,
+        required: false,
+    },
+    description: {
+        type: String,
+        required: false,
+    },
+    outcome: {
+        type: String,
+        required: false,
+    },
+    behaviour: {
+        type: String,
+        required: false,
+    },      
+},
+{
+    timestamps: true
+}
+);
+
+
+const kerntaakSchema = new Schema({
+    id: {
+        type: UUID,
+        unique: true,
+        required: true,
+        default: Uuid.v4()
+    },
+    code: {
+        type: String,
+        required: true,
+    },    
+    part: {
+        type: String,
+        required: true,
+    },
+    name: {
+        type: String,
+        required: true,
+    },
+    informalName: {
+        type: String,
+        required: false,
+    },
+    description: {
+        type: String,
+        required: false,
+    },
+    werkprocessen: [WerkprocesSchema]
+},
+{
+    timestamps: true
+})
+
+const CreboSchema = new Schema({
+    id: {
+        type: UUID,
+        unique: true,
+        required: true,
     },
     code: {
         type: String,
@@ -38,21 +107,18 @@ const CreboSchema = new Schema({
     kdpdflink: {
         type: String,
         required: false,
-    }
+    },
+    fileCode: {
+        type: String,
+        required: false
+    },
+    kerntaken: [kerntaakSchema]
+},
+{
+    collection: 'Crebo',
+    timestamps: true
 });
-const CreboModel = mongoose.model('Crebo', CreboSchema);
+const CreboModel = mongoose.model('CreboModel', CreboSchema);
+
+// console.log(`models>CreboMan>schema.js>at CreboModel ${CreboModel}`);
 module.exports = CreboModel;
-
-// CreboObject is the schema of the crebo document.
-// This object will be used to manage database operations.
-const CreboObject = {
-    id: null,           // Type UUIDv4
-    code: null,         // Type String, example "25606"
-    level: null,        // Type String, example "4" stands for "MBO niveau 4"
-    name: null,         // Type String, example "expert IT systems and devices"
-    description: null,  // Type String, official description of the crebo.
-    sbblink: null,      // Type String, example "https://kwalificatie-mijn.s-bb.nl/kwalificatie/expert-it-systems-and-devices/cmVzdWx0YWF0VHlwZT01O2Rvc3NpZXJJZD01MTMwO2t3YWxpZmljYXRpZUlkPTEzMjE0NzY="
-    kdpdflink: null     // Type String, example "https://kwalificatie-mijn.s-bb.nl/Details/DownloadDocument/1402198"
-}
-
-module.exports = CreboObject;
