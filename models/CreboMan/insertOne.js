@@ -102,4 +102,4 @@ async function insertOne(newCrebo) {
         )
 }
 
-module.exports = insertOne;
+exports.insertOne = insertOne;

@@ -1,51 +1,12 @@
-getAll = require('./getAll');
-insertOne = require('./insertOne');
-
-module.exports = insertOne;
-module.exports = getAll;
-
-// updateOne updates one crebo document from the crebo collection.
-// updatedCrebo parameter is a object with all the updated crebo information. The id
-// is also present in the updatedcrebo object.
-async function updateOne(updatedCrebo) {
-
-}
-exports.updateOne = updateOne;
+// index.js is a collection of all functions to manage the CreboMan.
+// All functions are seperated in different files for readability improvement.
+exports.insertOne = require('./insertOne').insertOne;
+exports.insertMany = require('./insertMany').insertMany;
+exports.getOne = require('./getOne').getOne;
+exports.getAll = require('./getAll').getAll;
+exports.updateOne = require('./updateOne').updateOne;
+exports.deleteOne = require('./deleteOne').deleteOne;
+exports.deleteAll = require('./deleteAll').deleteAll;
 
 
-// getOne fetches one document from the crebo collection.
-// creboId will be used to fetch the document with the request id.
-// The MongDB _id field will not be used. Each crebo document has its own id field.
-async function getOne(creboId) {
-
-}
-exports.getOne = getOne;
-
-
-// deleteOne deletes one document from the crebo collection.
-// creboId will be used to delete the document with the given id.
-// The MongoDB _id field will not be used. Each crebo document has its own id field.
-async function deleteOne(creboId) {
-
-}
-exports.deleteOne = deleteOne;
-
-
-// insertMany inserts many documents into the crebo collection.
-// newCreboArray is een array of Crebo objects. Each crebo object has no id.
-// for each crebo document a id field (uuidv4) will be generated.
-async function insertMany(newCreboArray) {
-
-}
-exports.insertMany = insertMany;
-
-
-
-
-
-// deleteAll deletes all documents from the crebo collection.
-// VERY RISKY METHOD: shut only be used by administrators.
-async function deleteAll() {
-
-}
-exports.deleteAll = deleteAll;
+//TODO: functions insertMany, updateOne, deleteOne, deleteAll
