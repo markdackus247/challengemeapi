@@ -68,14 +68,15 @@ exports.updateOne = (req, res, next) => {
         .then(
             updateResult => {
                 // console.log(`controllers>creboMan.js>updateOne>updateOne>then>updateResult: ${updateResult}`);
-                const newCreboObject = {...updateResult.result[0], ...creboUpdates}
-                console.log(`controllers>creboMan.js>updateOne>updateOne>then>newCreboObject: ${newCreboObject}`);
-                res.json(newCreboObject);
+
+                // console.log(`controllers>creboMan.js>updateOne>updateOne>then>newCreboObject: ${newCreboObject}`);
+                res.json(updateResult);
             }
         )
         .catch(
             err => {
-                console.log(err);
+                console.log(`controllers>creboMan.js>updateOne>catch>err: ${err}`);
+                return next(err);
             }
         )
 }

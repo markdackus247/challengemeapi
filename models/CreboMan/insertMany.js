@@ -1,6 +1,7 @@
 const CreboModel = require('./schema');
-const ErrObject = require('./error');
-const returnObject = require('./returnObject');
+
+const { insertOneErr, insertOneReturnObject } = require('../../lib/models/insertOne');
+
 
 // insertMany inserts many documents into the crebo collection.
 // newCreboArray is een array of Crebo objects. Each crebo object has no id.
@@ -11,7 +12,7 @@ async function insertMany() {
         .then(
             getResult => {
                 console.log(`models>CreboMan>getAll>getAll>getResult ${getResult}`);
-                return deleteOneReturnObject(getResult);
+                return insertOneReturnObject(getResult);
             }
         )
         .catch(

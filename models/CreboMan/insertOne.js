@@ -1,41 +1,8 @@
 const CreboModel = require('./schema');
-const ErrObject = require('./error');
-const returnObject = require('./returnObject');
-
 
 const Uuid = require('uuid');
 
-// insertOneErr will generate a default error object from the type ErrObject.
-// Example for calling this function.
-// insertOneErr([{
-//         code: "NoDbConnection",
-//         detail: "Unable to save the information because of connection problems.",
-//         source: "AllCrebos/insertOne"
-//     }])
-function insertOneErr(errArray) {
-    const errorMessage = ErrObject;
-
-    errorMessage.type = 503;
-    errorMessage.errors = errArray;
-
-    return errorMessage;
-}
-
-
-// insertOnenewReturnObject will generate a default object for database management.
-// it converts the MongoDB return object to a default object.
-function insertOneReturnObject(newCreboObjectArray) {
-    const newReturnObject = returnObject;
-
-    newReturnObject.operation = "insert";
-    newReturnObject.passed = true;
-    newReturnObject.count = newCreboObjectArray.length;
-    newReturnObject.result = newCreboObjectArray;
-    newReturnObject.before = [];
-
-    return newReturnObject;
-}
-
+const { insertOneErr, insertOneReturnObject } = require('../../lib/models/insertOne');
 
 // insertOne inserts one crebo document into the crebo collection.
 // newCrebo parameter is a object with all the crebo information. The id (uuidv4) of the

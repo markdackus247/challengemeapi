@@ -1,6 +1,7 @@
 const CreboModel = require('./schema');
-const ErrObject = require('./error');
-const returnObject = require('./returnObject');
+
+const { ErrObject } = require('../../lib/error/errObject');
+const { returnObject } = require('../../lib/models/returnObject');
 
 // getOneReturnObject generates a object with all the document in it.
 // The documents are an array of objects this will be stored in the
@@ -22,7 +23,7 @@ function getOneReturnObject(getOneAbjectArray) {
 // The MongDB _id field will not be used. Each crebo document has its own id field.
 async function getOne(creboId) {
     return CreboModel
-        .findOne({id: creboId})
+        .findOne({ id: creboId })
         .then(
             getResult => {
                 // console.log(`models>CreboMan>getOne>getOne>getResult ${getResult}`);

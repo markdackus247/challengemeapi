@@ -1,6 +1,7 @@
 const CreboModel = require('./schema');
-const ErrObject = require('./error');
-const returnObject = require('./returnObject');
+
+const { ErrObject } = require('../../lib/error/errObject');
+const { returnObject } = require('../../lib/models/returnObject');
 
 // getAllReturnObject generates a object with all the document in it.
 // The documents are an array of objects this will be stored in the

@@ -1,6 +1,7 @@
 const CreboModel = require('./schema');
-const ErrObject = require('./error');
-const returnObject = require('./returnObject');
+
+const { ErrObject } = require('../../lib/error/errObject');
+const { returnObject } = require('../../lib/models/returnObject');
 
 // deleteAll deletes all documents from the crebo collection.
 // VERY RISKY METHOD: shut only be used by administrators.
