@@ -2,7 +2,10 @@ const CreboModel = require('./schema');
 
 const Uuid = require('uuid');
 
-const { insertOneErr, insertOneReturnObject } = require('../../lib/models/insertOne');
+const { 
+    insertOneErr, 
+    insertOneReturnObject,
+    insertOneToBroker } = require('../../lib/models/insertOne');
 
 // insertOne inserts one crebo document into the crebo collection.
 // newCrebo parameter is a object with all the crebo information. The id (uuidv4) of the
@@ -43,6 +46,9 @@ async function insertOne(newCrebo) {
             () => {
                 // console.log('insertResult in CreboMan.js>insertOne>then');
                 // console.log('insertResultObject in CremoMan.js>insertOne>then', insertOnenewReturnObject([newCrebo]));
+
+                insertOneToBroker(newCrebo);
+
                 return insertOneReturnObject([newCrebo]);
             }
         )
